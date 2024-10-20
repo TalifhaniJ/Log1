@@ -1,0 +1,215 @@
+# Define the main screen
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 0, 20, 0]
+        spacing: 20
+        y: Window.height - 650
+
+        GridLayout:
+            cols: 2
+            padding: [20, 10, 20, 10]
+            spacing: 10
+            size_hint_y: None
+            height: self.minimum_height
+            
+            Label:
+                text: 'Measured Depth:'
+                size_hint: (0.4, None)
+                height: 40
+                font_size: 16
+            TextInput:
+                id: depth_input
+                hint_text: 'Enter measured depth'
+                size_hint: (1, None)
+                height: 40
+                font_size: 16
+            
+            Label:
+                text: 'Profile Description:'
+                size_hint: (0.4, None)
+                height: 40
+                font_size: 16
+            TextInput:
+                id: note_input
+                hint_text: 'Enter Profile Description'
+                size_hint: (1, None)
+                height: 100
+                font_size: 16
+                multiline: True
+            
+            Label:
+                text: 'Side notes:'
+                size_hint: (0.4, None)
+                height: 40
+                font_size: 16
+            TextInput:
+                id: sidenote_input
+                hint_text: 'Enter Side notes'
+                size_hint: (1, None)
+                height: 40
+                font_size: 16
+        
+        Button:
+            text: 'Save Profile'
+            size_hint: (1, None)
+            height: 60
+            font_size: 16
+            on_press: app.save_note(self)
+
+        Button:
+            text: 'Preview Notes'
+            size_hint: (1, None)
+            height: 60
+            font_size: 16
+            on_press: app.go_to_preview(self)
+
+        Button:
+            text: 'Track Logs'
+            size_hint: (1, None)
+            height: 60
+            font_size: 16
+            on_press: app.go_to_files(self)
+        
+        Label:
+            text: 'RECOMMENDED STANDARD PROCEDURES FOR DESCRIBING PROFILES'
+            font_size: 18
+            bold: True
+            size_hint: (1, None)
+            height: 40
+
+        GridLayout:
+            id: descriptor_table
+            cols: 2
+            spacing: 15
+            size_hint_y: None
+            height: self.minimum_height
+            
+            Label:
+                text: 'Soil'
+                font_size: 26
+                bold: True
+                size_hint_y: None
+                height: 15
+            Label:
+                text: 'Rock'
+                font_size: 26
+                bold: True
+                size_hint_y: None
+                height: 15
+
+            # Adding soil and rock descriptors
+            Label:
+                text: 'Moisture condition'
+                font_size: 16
+                size_hint_y: None
+                height: 10
+            Label:
+                text: 'Colour'
+                font_size: 16
+                size_hint_y: None
+                height: 10
+
+            # Add remaining descriptors as needed...
+
+# Preview screen layout
+<PreviewScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 5
+        size_hint_y: None
+        height: self.minimum_height
+        
+        ScrollView:
+            size_hint: (1, None)
+            size: (Window.width, Window.height - 100)
+            GridLayout:
+                id: table_layout
+                cols: 3
+                spacing: 0
+                padding: [5, 50, 5, 100]
+                size_hint_y: None
+                height: self.minimum_height
+
+        TextInput:
+            id: csv_name_input
+            hint_text: 'Logging ID'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+        
+        Button:
+            text: 'Save Log'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+            on_press: app.save_as_csv(self)
+
+        Button:
+            text: 'Back'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+            on_press: app.go_to_main(self)
+
+# Files screen layout
+<FilesScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 5
+        size_hint_y: None
+        height: self.minimum_height
+        
+        ScrollView:
+            size_hint: (1, None)
+            size: (Window.width, Window.height - 100)
+            GridLayout:
+                id: files_table
+                cols: 1
+                spacing: 10
+                padding: [20, 50, 20, 100]
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: 'Back'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+            on_press: app.go_to_main(self)
+
+        Button:
+            text: 'Save to'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+            on_press: app.open_file_picker(self)
+
+# CSV view screen layout
+<CSVViewScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 5
+        size_hint_y: None
+        height: self.minimum_height
+        
+        ScrollView:
+            size_hint: (1, None)
+            size: (Window.width, Window.height - 100)
+            GridLayout:
+                id: csv_table
+                cols: 3
+                spacing: 20
+                padding: [20, 50, 20, 100]
+                size_hint_y: None
+                height: self.minimum_height
+
+        Button:
+            text: 'Back'
+            size_hint: (1, None)
+            height: 40
+            font_size: 16
+            on_press: app.go_to_files(self)
